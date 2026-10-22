@@ -1,0 +1,200 @@
+{
+  "corpus": {
+    "label": "wikipedia-ios",
+    "upstream": "https://github.com/wikimedia/wikipedia-ios",
+    "commit": "27a82770e40cbe3007dc287e059cc3a6d11b6f77",
+    "warm": null,
+    "index_build": [
+      "/bin/sh",
+      "-c",
+      "xcodebuild -project Wikipedia.xcodeproj -scheme Wikipedia -destination 'generic/platform=iOS Simulator' ARCHS=arm64 -derivedDataPath \"$BENCH_DERIVED_DATA\" CODE_SIGNING_ALLOWED=NO build-for-testing"
+    ],
+    "note": "Pass the clone with --corpus <clone>@<commit>; `repository` is left out because a public file cannot name a local path. warm null: not built, so every check is answer-based or restored. index_build is for arm B's index store only; it needs no setup step."
+  },
+  "preamble": "This repository cannot be built or tested here: answer from its source. Paths are repository-relative.",
+  "answer_rule": "End your reply with exactly one line that starts with ANSWER: and holds only the answer in the form the task asks for.",
+  "tasks": [
+    {
+      "id": "def-invalidate-for-you-cache",
+      "kind": "find definition",
+      "prompt": "Where is the method invalidateForYouCache(project:) declared? Give the repository-relative file path and the line its declaration starts on, as path:line.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+      "check": {
+        "type": "answer_all",
+        "patterns": [
+          "Home/WMFHomeDataController\\.swift",
+          "(?<![0-9]):56\\b"
+        ],
+        "reference_answer": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift:56",
+        "wrong_answer": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift:51",
+        "pinned_lines": [
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+            "line": 56,
+            "contains": "func invalidateForYouCache(project"
+          }
+        ]
+      }
+    },
+    {
+      "id": "callers-should-show-yir-settings-item",
+      "kind": "find callers",
+      "prompt": "Which files call the Year in Review data controller's method shouldShowYearInReviewSettingsItem(countryCode:), from Swift or from Objective-C (an Objective-C call spells it shouldShowYearInReviewSettingsItemWithCountryCode:)? Count test files too, but not the file that declares the method. Give file names only, comma-separated.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Year In Review/WMFYearInReviewDataController.swift",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "WMFSettingsDataController.swift",
+          "SettingsTabViewController.swift",
+          "WMFSettingsViewController.m",
+          "WMFYearInReviewSharedRulesTests.swift"
+        ]
+      }
+    },
+    {
+      "id": "callers-for-you-because-you-read-is-on",
+      "kind": "find callers",
+      "prompt": "Which files call forYouBecauseYouReadIsOn() on the Home data controller? Count test files too, but not the file that declares the method. Give file names only, comma-separated.",
+      "recent_file": "WMFComponents/Sources/WMFComponents/Components/Home/WMFHomeViewModel.swift",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "WMFHomeViewModel.swift",
+          "WMFHomeFeedForYouSettingsViewModel.swift",
+          "WMFHomeViewModelTests.swift",
+          "WMFHomeDataControllerSettingsTests.swift"
+        ]
+      }
+    },
+    {
+      "id": "type-local-notification-log-events",
+      "kind": "understand a type",
+      "prompt": "The struct WMFLocalNotificationLogEntry has a nested enum named Event. List every case of that enum by its Swift case name, comma-separated.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "runStarted",
+          "scheduled",
+          "skippedAlreadyHandled",
+          "skippedNotAuthorized",
+          "skippedTooLate",
+          "failedFetch",
+          "failedNoContent",
+          "failedSchedule",
+          "cancelledByUserVisit",
+          "cancelledByDisable",
+          "tapped"
+        ]
+      }
+    },
+    {
+      "id": "type-year-in-review-badge-delegate-adopters",
+      "kind": "understand a type",
+      "prompt": "The protocol YearInReviewBadgeDelegate is adopted by types that declare it on a line of the form `extension T: YearInReviewBadgeDelegate`. List the type names T (not the files), comma-separated. A class that only inherits the conformance from a superclass does not count.",
+      "recent_file": "WMFComponents/Sources/WMFComponents/Coordinator/YearInReviewBadgeDelegate.swift",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "SearchViewController",
+          "ExploreViewController",
+          "HomeViewController",
+          "ArticleViewController",
+          "WMFActivityTabViewController",
+          "SavedViewController",
+          "PlacesViewController"
+        ]
+      }
+    },
+    {
+      "id": "ui-passage-not-found-toast",
+      "kind": "trace UI string",
+      "prompt": "A toast reading \"This passage is no longer in the article\" can appear after the user opens an article from a semantic search result. Which file and which function decide to show that toast (the function that calls the toast API, not the one that holds the string)? Give the repository-relative path, a colon, then the function name with no parentheses, as `path: function`.",
+      "recent_file": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift",
+      "check": {
+        "type": "answer_all",
+        "patterns": [
+          "ArticleViewController\\+SemanticSearch\\.swift",
+          "\\bhighlightSemanticSearchPassages\\b"
+        ],
+        "reference_answer": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift: highlightSemanticSearchPassages",
+        "wrong_answer": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift: scrollToSemanticSearchTargetIfReady"
+      }
+    },
+    {
+      "id": "ui-donation-reminder-settings-toast",
+      "kind": "trace UI string",
+      "prompt": "A toast reading \"Donation reminders can be modified anytime in Settings.\" is shown after the user dismisses the in-article donation reminder card. Which file and which function show it? Give the repository-relative path, a colon, then the function name with no parentheses, as `path: function`.",
+      "recent_file": "Wikipedia/Code/ArticleViewController+DonationReminder.swift",
+      "check": {
+        "type": "answer_all",
+        "patterns": [
+          "ArticleViewController\\+DonationReminder\\.swift",
+          "\\bdidTapDonationReminderNotNow\\b"
+        ],
+        "reference_answer": "Wikipedia/Code/ArticleViewController+DonationReminder.swift: didTapDonationReminderNotNow",
+        "wrong_answer": "Wikipedia/Code/ArticleViewController+DonationReminder.swift: showDonationReminderSettings"
+      }
+    },
+    {
+      "id": "fix-seen-articles-still-shown",
+      "kind": "locate and fix",
+      "prompt": "In the Home feed, articles I have already seen in the last month keep coming back, while the articles I saw several months ago are the ones being left out. Find the cause in the source and fix it with a minimal change.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+      "inject": {
+        "file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+        "find": "return seen.filter { $0.value > oldest }",
+        "replace": "return seen.filter { $0.value < oldest }"
+      },
+      "check": {
+        "type": "restored",
+        "alternatives": [
+          "seen\\.filter\\s*\\{\\s*\\$0\\.value\\s*>=\\s*oldest\\s*\\}",
+          "seen\\.filter\\s*\\{\\s*oldest\\s*<\\s*\\$0\\.value\\s*\\}",
+          "seen\\.filter\\s*\\{\\s*oldest\\s*<=\\s*\\$0\\.value\\s*\\}"
+        ]
+      }
+    },
+    {
+      "id": "fix-donation-reminder-goal-off-by-one",
+      "kind": "locate and fix",
+      "prompt": "A donor set a reminder to be shown after reading 3 articles. After they read exactly 3 articles in the current cycle the in-article reminder card does not appear; it only appears once they read a fourth. Find the cause in the source and fix it with a minimal change.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Donor Experience/WMFDonationReminderDataController.swift",
+      "inject": {
+        "file": "WMFData/Sources/WMFData/Data Controllers/Donor Experience/WMFDonationReminderDataController.swift",
+        "find": "return articlesRead >= articlesReadGoal",
+        "replace": "return articlesRead > articlesReadGoal"
+      },
+      "check": {
+        "type": "restored",
+        "alternatives": [
+          "return\\s+articlesReadGoal\\s*<=\\s*articlesRead\\b",
+          "return\\s+!\\s*\\(\\s*articlesRead\\s*<\\s*articlesReadGoal\\s*\\)",
+          "return\\s+articlesRead\\s*>\\s*articlesReadGoal\\s*-\\s*1\\b"
+        ]
+      }
+    },
+    {
+      "id": "chain-see-first-preference",
+      "kind": "chained long session",
+      "prompt": "Three linked questions, each needs the previous answer. (1) Which case of the enum WMFUserDefaultsKey has the raw value \"home-feed-see-first\"? Give the case name. (2) Which public method of WMFHomeDataController returns the value stored under that key? Give the method name with no parentheses. (3) Which file under WMFComponents/Sources calls that method? Give the file name only. Answer with the three parts separated by ` | `, as `case | method | file`.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+      "check": {
+        "type": "answer_parts",
+        "parts": [
+          [
+            "^homeFeedSeeFirst$"
+          ],
+          [
+            "^seeFirstContent(\\(\\))?$"
+          ],
+          [
+            "^(.*/)?WMFHomeViewModel\\.swift$"
+          ]
+        ],
+        "reference_answer": "homeFeedSeeFirst | seeFirstContent | WMFHomeViewModel.swift",
+        "wrong_answer": "homeFeedSeeFirst | setSeeFirstContent | WMFHomeViewModel.swift"
+      }
+    }
+  ]
+}
