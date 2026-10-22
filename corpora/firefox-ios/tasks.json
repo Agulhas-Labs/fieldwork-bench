@@ -50,6 +50,43 @@
           "AppIconView.swift",
           "AppIconSelectionView.swift",
           "AIControlsSettingsView.swift"
+        ],
+        "pinned_lines": [
+          {
+            "file": "BrowserKit/Sources/Common/Theming/ThemeManager+Resolve.swift",
+            "line": 10,
+            "contains": "func resolveTheme(for window: WindowUUID?, privateOverride: Bool?)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Settings/AIControls/AIControlsSettingsView.swift",
+            "line": 26,
+            "contains": "privateOverride: false"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Settings/AppIconSelection/AppIconSelectionView.swift",
+            "line": 41,
+            "contains": "privateOverride: false"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Settings/AppIconSelection/AppIconView.swift",
+            "line": 34,
+            "contains": "privateOverride: false"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Settings/AppearanceSettings/AddressBarSettingsView.swift",
+            "line": 33,
+            "contains": "privateOverride: false"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Settings/AppearanceSettings/AppearanceSettingsView.swift",
+            "line": 37,
+            "contains": "privateOverride: false"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Settings/AppearanceSettings/Zoom/PageZoomSettingView.swift",
+            "line": 41,
+            "contains": "privateOverride: false"
+          }
         ]
       }
     },
@@ -66,26 +103,144 @@
           "BookmarksViewController.swift",
           "DownloadsPanel.swift",
           "HistoryPanel.swift"
+        ],
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Client/Frontend/Library/LibraryPanelHelper.swift",
+            "line": 150,
+            "contains": "func applyGroupedBackground"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/Bookmarks/BookmarksViewController.swift",
+            "line": 625,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/Bookmarks/BookmarksViewController.swift",
+            "line": 635,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/Downloads/DownloadsPanel.swift",
+            "line": 371,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/HistoryPanel/HistoryPanel.swift",
+            "line": 438,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/HistoryPanel/HistoryPanel.swift",
+            "line": 471,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/Reader/ReaderPanel.swift",
+            "line": 377,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Library/RecentlyClosedTabsPanel.swift",
+            "line": 136,
+            "contains": "applyGroupedBackground(theme: theme, in: tableView)"
+          }
         ]
       }
     },
     {
-      "id": "type-theme-conformers",
+      "id": "type-web-compat-sub-option-cases",
       "kind": "understand a type",
-      "recent_file": "BrowserKit/Sources/Common/Theming/NovaPrivateTheme.swift",
-      "prompt": "Which types directly conform to the Theme protocol (declared in BrowserKit's Common module)? Search the Firefox app (firefox-ios/Client) and BrowserKit sources; ignore test targets and focus-ios. Count a type if its declaration lists Theme as a conformance. Give the type names only, comma-separated.",
+      "recent_file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+      "prompt": "In the Firefox app, the \"Report a Website Issue\" form groups its reasons into categories, and each category offers sub-options modelled by the enum WebCompatSubOption. What are all of its cases? Give the case names only, comma-separated.",
       "check": {
         "type": "answer_set",
         "expected": [
-          "LightTheme",
-          "DarkTheme",
-          "NightModeTheme",
-          "PrivateModeTheme",
-          "NovaLightTheme",
-          "NovaDarkTheme",
-          "NovaNightModeTheme",
-          "NovaPrivateTheme",
-          "TabTrayPanelSwipeTheme"
+          "browserBlocked",
+          "pageNotLoading",
+          "missingItems",
+          "buttonsNotWorking",
+          "imagesNotLoaded",
+          "itemsOverlapped",
+          "itemsMisaligned",
+          "itemsNotVisible",
+          "noVideo",
+          "noAudio",
+          "mediaControlsBroken",
+          "playbackFails",
+          "captionsMissing"
+        ],
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 34,
+            "contains": "enum WebCompatSubOption"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 35,
+            "contains": "case browserBlocked"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 36,
+            "contains": "case pageNotLoading"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 37,
+            "contains": "case missingItems"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 38,
+            "contains": "case buttonsNotWorking"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 39,
+            "contains": "case imagesNotLoaded"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 40,
+            "contains": "case itemsOverlapped"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 41,
+            "contains": "case itemsMisaligned"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 42,
+            "contains": "case itemsNotVisible"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 43,
+            "contains": "case noVideo"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 44,
+            "contains": "case noAudio"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 45,
+            "contains": "case mediaControlsBroken"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 46,
+            "contains": "case playbackFails"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/WebCompatReporter/Redux/WebCompatIssueCategory.swift",
+            "line": 47,
+            "contains": "case captionsMissing"
+          }
         ]
       }
     },
@@ -101,6 +256,33 @@
           "context",
           "widget",
           "topsite"
+        ],
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/SearchEngines/SearchAccessPoint.swift",
+            "line": 9,
+            "contains": "enum SearchAccessPoint"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/SearchEngines/SearchAccessPoint.swift",
+            "line": 11,
+            "contains": "case `default`"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/SearchEngines/SearchAccessPoint.swift",
+            "line": 13,
+            "contains": "case context"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/SearchEngines/SearchAccessPoint.swift",
+            "line": 15,
+            "contains": "case widget"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/SearchEngines/SearchAccessPoint.swift",
+            "line": 17,
+            "contains": "case topsite"
+          }
         ]
       }
     },
@@ -116,22 +298,81 @@
           "\\bannounceResultsCount\\b"
         ],
         "reference_answer": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift: announceResultsCount",
-        "wrong_answer": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift: scheduleResultsAnnouncement"
+        "wrong_answer": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift: scheduleResultsAnnouncement",
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Shared/Strings.swift",
+            "line": 2749,
+            "contains": "static let ResultsAboveA11yAnnouncement"
+          },
+          {
+            "file": "firefox-ios/Shared/Strings.swift",
+            "line": 2752,
+            "contains": "Suggestions above: %d"
+          },
+          {
+            "file": "firefox-ios/Shared/Strings.swift",
+            "line": 2754,
+            "contains": "static let ResultsBelowA11yAnnouncement"
+          },
+          {
+            "file": "firefox-ios/Shared/Strings.swift",
+            "line": 2757,
+            "contains": "Suggestions below: %d"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift",
+            "line": 313,
+            "contains": "func announceResultsCount"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift",
+            "line": 320,
+            "contains": ".Search.ResultsAboveA11yAnnouncement"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift",
+            "line": 321,
+            "contains": ".Search.ResultsBelowA11yAnnouncement"
+          }
+        ]
       }
     },
     {
-      "id": "trace-combine-windows-quick-action",
+      "id": "trace-no-archived-version-message",
       "kind": "trace UI string",
-      "recent_file": "firefox-ios/Client/Application/QuickActions.swift",
-      "prompt": "On iPad, the app's home-screen Quick Action (long-press the app icon) is titled \"Combine Windows\". Which function builds that shortcut item and gives it that title? (Ignore the debug feature-flag list and tests, which only mention the words.) Give the repository-relative path of its file and the function name, as path: function.",
+      "recent_file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorRegularContentView.swift",
+      "prompt": "On the Firefox app's native connection-error page, after the user asks for an earlier copy of the page and none exists, a card says \"No archived version found.\" Which function sets that card's label text (and the title of the button under it)? Give the repository-relative path of its file and the function name, as path: function.",
       "check": {
         "type": "answer_all",
         "patterns": [
-          "firefox-ios/Client/Application/QuickActions\\.swift",
-          "\\baddDynamicApplicationShortcutItemOfType\\b"
+          "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorRegularContentView\\.swift",
+          "\\bconfigureWaybackErrorCard\\b"
         ],
-        "reference_answer": "firefox-ios/Client/Application/QuickActions.swift: addDynamicApplicationShortcutItemOfType",
-        "wrong_answer": "firefox-ios/Client/Application/QuickActions.swift: removeDynamicApplicationShortcutItemOfType"
+        "reference_answer": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorRegularContentView.swift: configureWaybackErrorCard",
+        "wrong_answer": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorRegularContentView.swift: configureWaybackButton",
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Shared/Strings.swift",
+            "line": 1848,
+            "contains": "static let NotFoundLabel"
+          },
+          {
+            "file": "firefox-ios/Shared/Strings.swift",
+            "line": 1851,
+            "contains": "No archived version found."
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorRegularContentView.swift",
+            "line": 249,
+            "contains": "func configureWaybackErrorCard"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorRegularContentView.swift",
+            "line": 258,
+            "contains": "NotFoundLabel"
+          }
+        ]
       }
     },
     {
@@ -171,36 +412,51 @@
       }
     },
     {
-      "id": "chain-keyboard-request-to-first-responder",
+      "id": "chain-archive-found-telemetry-to-lookup",
       "kind": "chained long session",
-      "recent_file": "firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift",
-      "prompt": "Answer three linked questions about the Firefox app's toolbar, in order, each using the previous answer. (1) The enum ToolbarModernAction has exactly one case whose associated value is labelled shouldShow: name that case. (2) The address bar's modernReducer handles that case by copying its payload into a state property: give the repository-relative path and line of that statement, as path:line. (3) A BrowserKit view reads the state property you found in (2), combined with its editing flag, to choose between becoming and resigning first responder: give the repository-relative path of that view's file (non-test) and the name of the function containing that decision, as path: function. Separate the three answers with ' | ' on the ANSWER line.",
+      "recent_file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift",
+      "prompt": "Answer three linked questions about the Firefox app's native connection-error page, in order, each using the previous answer. (1) The struct WaybackTelemetry in firefox-ios/Client has one method per Glean event; name the method that records the archiveFound event, with no parentheses. (2) Outside tests, that method is called from exactly one line: give its repository-relative path and line, as path:line. (3) The function containing that call first awaits a static lookup method on a service type to find out whether an archived copy exists: give the repository-relative path of the file declaring that lookup method and its name, as path: function. Separate the three answers with ' | ' on the ANSWER line.",
       "check": {
         "type": "answer_parts",
         "parts": [
           [
-            "^didKeyboardRequestChange$"
+            "^foundArchive(\\(\\))?$"
           ],
           [
-            "firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState\\.swift[:]138\\b"
+            "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController\\.swift[:]442\\b"
           ],
           [
-            "BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView\\.swift",
-            "\\bconfigureURLTextField\\b"
+            "firefox-ios/Client/Frontend/Wayback/WaybackService\\.swift",
+            "\\bfetchSnapshot\\b"
           ]
         ],
-        "reference_answer": "didKeyboardRequestChange | firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift:138 | BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView.swift: configureURLTextField",
-        "wrong_answer": "didKeyboardRequestChange | firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift:137 | BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView.swift: configureURLTextField",
+        "reference_answer": "foundArchive | firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift:442 | firefox-ios/Client/Frontend/Wayback/WaybackService.swift: fetchSnapshot",
+        "wrong_answer": "foundArchive | firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift:441 | firefox-ios/Client/Frontend/Wayback/WaybackService.swift: fetchSnapshot",
         "pinned_lines": [
           {
-            "file": "firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift",
-            "line": 138,
-            "contains": "shouldShowKeyboard: shouldShow"
+            "file": "firefox-ios/Client/Frontend/Wayback/WaybackTelemetry.swift",
+            "line": 18,
+            "contains": "func foundArchive"
           },
           {
-            "file": "BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView.swift",
-            "line": 536,
-            "contains": "func configureURLTextField"
+            "file": "firefox-ios/Client/Frontend/Wayback/WaybackTelemetry.swift",
+            "line": 19,
+            "contains": "WebviewErrorPageWaybackMachine.archiveFound"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift",
+            "line": 442,
+            "contains": "telemetry.foundArchive()"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift",
+            "line": 437,
+            "contains": "WaybackService.fetchSnapshot"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Wayback/WaybackService.swift",
+            "line": 31,
+            "contains": "static func fetchSnapshot"
           }
         ]
       }

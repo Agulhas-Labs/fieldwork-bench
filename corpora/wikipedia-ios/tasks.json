@@ -37,32 +37,83 @@
       }
     },
     {
-      "id": "callers-should-show-yir-settings-item",
+      "id": "callers-configure-local-notification-actions",
       "kind": "find callers",
-      "prompt": "Which files call the Year in Review data controller's method shouldShowYearInReviewSettingsItem(countryCode:), from Swift or from Objective-C (an Objective-C call spells it shouldShowYearInReviewSettingsItemWithCountryCode:)? Count test files too, but not the file that declares the method. Give file names only, comma-separated.",
-      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Year In Review/WMFYearInReviewDataController.swift",
+      "prompt": "Which files call the Developer Settings view model's method configureLocalNotificationActions(dataStore:), from Swift or from Objective-C (an Objective-C call spells it configureLocalNotificationActionsWithDataStore:)? Count test files too, but not the file that declares the method. Give file names only, comma-separated.",
+      "recent_file": "Wikipedia/Code/LocalNotificationCoordinator.swift",
       "check": {
         "type": "answer_set",
         "expected": [
-          "WMFSettingsDataController.swift",
-          "SettingsTabViewController.swift",
-          "WMFSettingsViewController.m",
-          "WMFYearInReviewSharedRulesTests.swift"
+          "ProfileCoordinator.swift",
+          "AboutViewController.m"
+        ],
+        "pinned_lines": [
+          {
+            "file": "Wikipedia/Code/LocalNotificationCoordinator.swift",
+            "line": 81,
+            "contains": "func configureLocalNotificationActions(dataStore"
+          },
+          {
+            "file": "Wikipedia/Code/ProfileCoordinator.swift",
+            "line": 223,
+            "contains": "configureLocalNotificationActions(dataStore: dataStore)"
+          },
+          {
+            "file": "Wikipedia/Code/AboutViewController.m",
+            "line": 207,
+            "contains": "configureLocalNotificationActionsWithDataStore:"
+          }
         ]
       }
     },
     {
-      "id": "callers-for-you-because-you-read-is-on",
+      "id": "callers-record-seen-article",
       "kind": "find callers",
-      "prompt": "Which files call forYouBecauseYouReadIsOn() on the Home data controller? Count test files too, but not the file that declares the method. Give file names only, comma-separated.",
-      "recent_file": "WMFComponents/Sources/WMFComponents/Components/Home/WMFHomeViewModel.swift",
+      "prompt": "Which files call recordSeenArticle(title:project:date:) on the Home data controller? Count test files too, but not the file that declares the method. Give file names only, comma-separated.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
       "check": {
         "type": "answer_set",
         "expected": [
           "WMFHomeViewModel.swift",
-          "WMFHomeFeedForYouSettingsViewModel.swift",
-          "WMFHomeViewModelTests.swift",
-          "WMFHomeDataControllerSettingsTests.swift"
+          "WMFHomeSeenArticlesTests.swift",
+          "WMFHomeDataControllerTests.swift"
+        ],
+        "pinned_lines": [
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+            "line": 210,
+            "contains": "func recordSeenArticle(title"
+          },
+          {
+            "file": "WMFComponents/Sources/WMFComponents/Components/Home/WMFHomeViewModel.swift",
+            "line": 201,
+            "contains": "recordSeenArticle(title: card.title"
+          },
+          {
+            "file": "WMFComponents/Tests/WMFComponentsTests/WMFHomeSeenArticlesTests.swift",
+            "line": 34,
+            "contains": "recordSeenArticle(title:"
+          },
+          {
+            "file": "WMFComponents/Tests/WMFComponentsTests/WMFHomeSeenArticlesTests.swift",
+            "line": 44,
+            "contains": "recordSeenArticle(title:"
+          },
+          {
+            "file": "WMFComponents/Tests/WMFComponentsTests/WMFHomeSeenArticlesTests.swift",
+            "line": 53,
+            "contains": "recordSeenArticle(title:"
+          },
+          {
+            "file": "WMFComponents/Tests/WMFComponentsTests/WMFHomeSeenArticlesTests.swift",
+            "line": 67,
+            "contains": "recordSeenArticle(title:"
+          },
+          {
+            "file": "WMFData/Tests/WMFDataTests/WMFHomeDataControllerTests.swift",
+            "line": 119,
+            "contains": "recordSeenArticle(title:"
+          }
         ]
       }
     },
@@ -85,24 +136,108 @@
           "cancelledByUserVisit",
           "cancelledByDisable",
           "tapped"
+        ],
+        "pinned_lines": [
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 64,
+            "contains": "struct WMFLocalNotificationLogEntry"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 66,
+            "contains": "enum Event"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 68,
+            "contains": "case runStarted"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 69,
+            "contains": "case scheduled"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 70,
+            "contains": "case skippedAlreadyHandled"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 71,
+            "contains": "case skippedNotAuthorized"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 72,
+            "contains": "case skippedTooLate"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 73,
+            "contains": "case failedFetch"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 74,
+            "contains": "case failedNoContent"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 75,
+            "contains": "case failedSchedule"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 76,
+            "contains": "case cancelledByUserVisit"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 77,
+            "contains": "case cancelledByDisable"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationModels.swift",
+            "line": 78,
+            "contains": "case tapped"
+          }
         ]
       }
     },
     {
-      "id": "type-year-in-review-badge-delegate-adopters",
+      "id": "type-local-notification-scheduler-implementations",
       "kind": "understand a type",
-      "prompt": "The protocol YearInReviewBadgeDelegate is adopted by types that declare it on a line of the form `extension T: YearInReviewBadgeDelegate`. List the type names T (not the files), comma-separated. A class that only inherits the conformance from a superclass does not count.",
-      "recent_file": "WMFComponents/Sources/WMFComponents/Coordinator/YearInReviewBadgeDelegate.swift",
+      "prompt": "WMFLocalNotificationDataController hands the actual scheduling of notifications to an injected scheduler. Which concrete types in this repository can be injected there? List the type names, comma-separated.",
+      "recent_file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationScheduling.swift",
       "check": {
         "type": "answer_set",
         "expected": [
-          "SearchViewController",
-          "ExploreViewController",
-          "HomeViewController",
-          "ArticleViewController",
-          "WMFActivityTabViewController",
-          "SavedViewController",
-          "PlacesViewController"
+          "WMFUserNotificationCenterScheduler",
+          "WMFMockLocalNotificationScheduler"
+        ],
+        "pinned_lines": [
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationDataController.swift",
+            "line": 26,
+            "contains": "scheduler: WMFLocalNotificationScheduling"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationScheduling.swift",
+            "line": 4,
+            "contains": "public protocol WMFLocalNotificationScheduling"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Local Notifications/WMFLocalNotificationScheduling.swift",
+            "line": 14,
+            "contains": "struct WMFUserNotificationCenterScheduler: WMFLocalNotificationScheduling"
+          },
+          {
+            "file": "WMFData/Sources/WMFDataMocks/WMFMockLocalNotificationScheduler.swift",
+            "line": 6,
+            "contains": "actor WMFMockLocalNotificationScheduler: WMFLocalNotificationScheduling"
+          }
         ]
       }
     },
@@ -118,7 +253,29 @@
           "\\bhighlightSemanticSearchPassages\\b"
         ],
         "reference_answer": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift: highlightSemanticSearchPassages",
-        "wrong_answer": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift: scrollToSemanticSearchTargetIfReady"
+        "wrong_answer": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift: scrollToSemanticSearchTargetIfReady",
+        "pinned_lines": [
+          {
+            "file": "Wikipedia/Localizations/en.lproj/Localizable.strings",
+            "line": 1315,
+            "contains": "\"semantic-search-passage-not-found\""
+          },
+          {
+            "file": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift",
+            "line": 130,
+            "contains": "passageNotFoundMessage = WMFLocalizedString"
+          },
+          {
+            "file": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift",
+            "line": 15,
+            "contains": "func highlightSemanticSearchPassages"
+          },
+          {
+            "file": "Wikipedia/Code/ArticleViewController+SemanticSearch.swift",
+            "line": 28,
+            "contains": "showToast(Self.passageNotFoundMessage"
+          }
+        ]
       }
     },
     {
@@ -133,7 +290,29 @@
           "\\bdidTapDonationReminderNotNow\\b"
         ],
         "reference_answer": "Wikipedia/Code/ArticleViewController+DonationReminder.swift: didTapDonationReminderNotNow",
-        "wrong_answer": "Wikipedia/Code/ArticleViewController+DonationReminder.swift: showDonationReminderSettings"
+        "wrong_answer": "Wikipedia/Code/ArticleViewController+DonationReminder.swift: showDonationReminderSettings",
+        "pinned_lines": [
+          {
+            "file": "Wikipedia/Localizations/en.lproj/Localizable.strings",
+            "line": 392,
+            "contains": "\"donation-reminder-card-not-now-toast-settings\""
+          },
+          {
+            "file": "Wikipedia/Code/ArticleViewController+DonationReminder.swift",
+            "line": 167,
+            "contains": "func didTapDonationReminderNotNow"
+          },
+          {
+            "file": "Wikipedia/Code/ArticleViewController+DonationReminder.swift",
+            "line": 179,
+            "contains": "Donation reminders can be modified anytime in Settings."
+          },
+          {
+            "file": "Wikipedia/Code/ArticleViewController+DonationReminder.swift",
+            "line": 182,
+            "contains": "showRichToast(toastTitle"
+          }
+        ]
       }
     },
     {
@@ -193,7 +372,29 @@
           ]
         ],
         "reference_answer": "homeFeedSeeFirst | seeFirstContent | WMFHomeViewModel.swift",
-        "wrong_answer": "homeFeedSeeFirst | setSeeFirstContent | WMFHomeViewModel.swift"
+        "wrong_answer": "homeFeedSeeFirst | setSeeFirstContent | WMFHomeViewModel.swift",
+        "pinned_lines": [
+          {
+            "file": "WMFData/Sources/WMFData/Store/WMFUserDefaultsKey.swift",
+            "line": 104,
+            "contains": "homeFeedSeeFirst = \"home-feed-see-first\""
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+            "line": 113,
+            "contains": "func seeFirstContent()"
+          },
+          {
+            "file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
+            "line": 114,
+            "contains": "WMFUserDefaultsKey.homeFeedSeeFirst.rawValue"
+          },
+          {
+            "file": "WMFComponents/Sources/WMFComponents/Components/Home/WMFHomeViewModel.swift",
+            "line": 425,
+            "contains": "dataController.seeFirstContent()"
+          }
+        ]
       }
     }
   ]
