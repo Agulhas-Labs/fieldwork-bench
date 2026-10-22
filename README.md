@@ -34,9 +34,14 @@ python3 Benchmarks/bench.py validate --tasks <this repo>/corpora/wikipedia-ios/t
 sh Benchmarks/run.sh --tasks <same> --corpus <same> --repeats 3
 ```
 
-firefox-ios needs a harness with two fixes that land in sift's next release. One lets the hook check
-skip a file withheld for its size (its 608 KB `Strings.swift`). The other matches an injected file
-whose path holds a space.
+Two harness changes are still pending in sift, and until they land, numbers from these corpora are not
+comparable:
+
+- **wikipedia-ios:** its two fix tasks edit files whose paths hold a space. The current harness doesn't
+  recognise such a file as restored, so a correct fix scores as a failure. `validate` passes regardless.
+- **firefox-ios:** `validate` stops at its hook check, because the corpus's largest file (the 608 KB
+  `Strings.swift`) is withheld for its size. The benchmark and a direct replay also judge that file
+  differently, so firefox-ios numbers wait until that is understood.
 
 ## Layout
 
