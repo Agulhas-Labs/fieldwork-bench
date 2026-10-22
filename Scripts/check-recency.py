@@ -31,8 +31,9 @@ def problem(clone, commit, pin, since):
     where = "%s:%d" % (pin["file"], pin["line"])
     if len(lines) < pin["line"] or pin["contains"] not in lines[pin["line"] - 1]:
         return "%s does not hold %r" % (where, pin["contains"])
-    blame = git(clone, "blame", "--porcelain", "-L", "%d,%d" % (pin["line"], pin["line"]), commit, "--",
-                pin["file"]).splitlines()
+    # A user's blame.showRoot would hide the boundary marker that says a line predates the clone.
+    blame = git(clone, "-c", "blame.showRoot=false", "blame", "--porcelain", "-L", "%d,%d" % (pin["line"], pin["line"]),
+                commit, "--", pin["file"]).splitlines()
     if "boundary" in blame:
         return "%s predates the clone" % where
     time = next(int(line.split()[1]) for line in blame if line.startswith("committer-time "))

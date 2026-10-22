@@ -415,12 +415,12 @@
       "id": "chain-archive-found-telemetry-to-lookup",
       "kind": "chained long session",
       "recent_file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift",
-      "prompt": "Answer three linked questions about the Firefox app's native connection-error page, in order, each using the previous answer. (1) The struct WaybackTelemetry in firefox-ios/Client has one method per Glean event; name the method that records the archiveFound event. (2) Outside tests, that method is called from exactly one line: give its repository-relative path and line, as path:line. (3) The function containing that call first awaits a static lookup method on a service type to find out whether an archived copy exists: give the repository-relative path of the file declaring that lookup method and its name, as path: function. Separate the three answers with ' | ' on the ANSWER line.",
+      "prompt": "Answer three linked questions about the Firefox app's native connection-error page, in order, each using the previous answer. (1) The struct WaybackTelemetry in firefox-ios/Client has one method per Glean event; name the method that records the archiveFound event, with no parentheses. (2) Outside tests, that method is called from exactly one line: give its repository-relative path and line, as path:line. (3) The function containing that call first awaits a static lookup method on a service type to find out whether an archived copy exists: give the repository-relative path of the file declaring that lookup method and its name, as path: function. Separate the three answers with ' | ' on the ANSWER line.",
       "check": {
         "type": "answer_parts",
         "parts": [
           [
-            "^foundArchive$"
+            "^foundArchive(\\(\\))?$"
           ],
           [
             "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController\\.swift[:]442\\b"
@@ -437,6 +437,11 @@
             "file": "firefox-ios/Client/Frontend/Wayback/WaybackTelemetry.swift",
             "line": 18,
             "contains": "func foundArchive"
+          },
+          {
+            "file": "firefox-ios/Client/Frontend/Wayback/WaybackTelemetry.swift",
+            "line": 19,
+            "contains": "WebviewErrorPageWaybackMachine.archiveFound"
           },
           {
             "file": "firefox-ios/Client/Frontend/NativeErrorPage/NativeErrorPageViewController.swift",

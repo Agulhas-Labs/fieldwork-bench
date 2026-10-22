@@ -17,11 +17,11 @@ and anyone can rerun it.
 Rows are added as each corpus's task file passes the harness's `validate`, which makes no model calls.
 Each file has ten tasks: a definition, two caller sets, two type questions, two UI strings traced to the
 code that shows them, two injected one-line bugs, and one chained question. One of wikipedia-ios's
-caller sets includes Objective-C files, to show where a Swift-only index stops.
+caller sets includes an Objective-C file, to show where a Swift-only index stops.
 
 ## Running a corpus
 
-Fetch the corpus at its pinned commit (the history since June is enough to check which files changed
+Fetch the corpus at its pinned commit (the history since June is enough to check which lines changed
 recently), then run the harness from a sift checkout, passing the clone with `--corpus`:
 
 ```sh
