@@ -41,3 +41,8 @@ git config core.hooksPath githooks
 ```
 
 A contributor without the maintainer's external lists pushes with `FIELDWORK_PRIVACY_GATE=skip`.
+
+## License
+
+Apache-2.0 for the files in this repository. See [LICENSE](LICENSE). Each corpus keeps its own licence
+upstream, named in the table above; none of its code is copied here.
