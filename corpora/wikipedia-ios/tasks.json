@@ -139,7 +139,7 @@
     {
       "id": "fix-seen-articles-still-shown",
       "kind": "locate and fix",
-      "prompt": "In the Home feed, articles I have already seen in the last month keep coming back, while the articles I saw several months ago are the ones being left out. Find the cause in the source and fix it with a minimal change.",
+      "prompt": "In the Home feed, articles I have already seen in the last month keep coming back. Find the cause in the source and fix it with a minimal change.",
       "recent_file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
       "inject": {
         "file": "WMFData/Sources/WMFData/Data Controllers/Home/WMFHomeDataController.swift",
