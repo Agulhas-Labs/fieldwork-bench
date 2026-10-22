@@ -11,8 +11,32 @@ and anyone can rerun it.
 
 | Corpus | Upstream | Licence | Pinned commit | Swift lines |
 | --- | --- | --- | --- | --- |
+| wikipedia-ios | [wikimedia/wikipedia-ios](https://github.com/wikimedia/wikipedia-ios) | MIT | `27a82770` | 229,615, plus 28,215 lines of Objective-C |
+| firefox-ios | [mozilla-mobile/firefox-ios](https://github.com/mozilla-mobile/firefox-ios) | MPL-2.0 | `d284ab8e` | 524,909 |
 
 Rows are added as each corpus's task file passes the harness's `validate`, which makes no model calls.
+Each file has ten tasks: a definition, two caller sets, two type questions, two UI strings traced to the
+code that shows them, two injected one-line bugs, and one chained question. One of wikipedia-ios's
+caller sets includes Objective-C files, to show where a Swift-only index stops.
+
+## Running a corpus
+
+Fetch the corpus at its pinned commit (the history since June is enough to check which files changed
+recently), then run the harness from a sift checkout, passing the clone with `--corpus`:
+
+```sh
+git clone --shallow-since=2026-06-01 https://github.com/wikimedia/wikipedia-ios .build/corpora/wikipedia-ios
+git -C .build/corpora/wikipedia-ios checkout 27a82770e40cbe3007dc287e059cc3a6d11b6f77
+
+# from a sift checkout
+python3 Benchmarks/bench.py validate --tasks <this repo>/corpora/wikipedia-ios/tasks.json \
+  --corpus <this repo>/.build/corpora/wikipedia-ios@27a82770e40cbe3007dc287e059cc3a6d11b6f77
+sh Benchmarks/run.sh --tasks <same> --corpus <same> --repeats 3
+```
+
+firefox-ios needs a harness with two fixes that land in sift's next release. One lets the hook check
+skip a file withheld for its size (its 608 KB `Strings.swift`). The other matches an injected file
+whose path holds a space.
 
 ## Layout
 
