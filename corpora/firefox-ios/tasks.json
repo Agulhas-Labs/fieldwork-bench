@@ -1,0 +1,209 @@
+{
+  "corpus": {
+    "label": "firefox-ios",
+    "upstream": "https://github.com/mozilla-mobile/firefox-ios",
+    "commit": "d284ab8e75be3c97561375cb9f2691b53689daef",
+    "warm": null,
+    "index_build": [
+      "/bin/sh",
+      "-c",
+      "curl --proto '=https' --tlsv1.2 -sSf -o firefox-ios/bin/nimbus-fml.sh https://raw.githubusercontent.com/mozilla/application-services/97fadb81fa3e7578c72c977ed66f6ae63be0e45d/components/nimbus/ios/scripts/nimbus-fml.sh && echo '443a72235811e6367914f80b2eacc900d55913442cb9d594930170e0e2cc5da4  firefox-ios/bin/nimbus-fml.sh' | shasum -a 256 -c && for n in AllFramesAtDocumentStart AllFramesAtDocumentEnd MainFrameAtDocumentStart MainFrameAtDocumentEnd WebcompatAllFramesAtDocumentStart NightModeAllFramesAtDocumentStart AutofillAllFramesAtDocumentStart AddressFormManager TranslationsEngine translations-engine.worker; do f=firefox-ios/Client/Assets/$n.js; [ -e \"$f\" ] || : > \"$f\"; done && xcodebuild -project firefox-ios/Client.xcodeproj -scheme Fennec -destination 'generic/platform=iOS Simulator' ARCHS=arm64 -derivedDataPath \"$BENCH_DERIVED_DATA\" CODE_SIGNING_ALLOWED=NO -skipMacroValidation -skipPackagePluginValidation build-for-testing"
+    ],
+    "note": "Pass the clone with --corpus <clone>@<commit>; `repository` is left out because a public file cannot name a local path. warm null: not built, so every check is answer-based or restored. index_build replaces bootstrap.sh for an index-only build: nimbus-fml.sh is fetched at application-services 97fadb81 (the commit behind MozillaRustComponents 160.0.20261020165345) and checked by sha256, the npm/webpack outputs are created empty (the index needs Swift only), and macro validation is skipped."
+  },
+  "preamble": "This repository cannot be built or tested here: answer from its source. Paths are repository-relative.",
+  "answer_rule": "End your reply with exactly one line that starts with ANSWER: and holds only the answer in the form the task asks for.",
+  "tasks": [
+    {
+      "id": "def-tracker-sheet-fill-ratio",
+      "kind": "find definition",
+      "recent_file": "firefox-ios/Client/Frontend/Home/Homepage/TrackerBlockerModule/TrackerBlockerSheetState.swift",
+      "prompt": "In the Firefox app (firefox-ios/Client, not focus-ios), where is the method fillRatio(for:) declared? Another type also has a property named fillRatio; I mean the method with the for: parameter. Give the repository-relative file path and the line its declaration starts on, as path:line.",
+      "check": {
+        "type": "answer_all",
+        "patterns": [
+          "TrackerBlockerSheetState\\.swift",
+          "[:]114\\b"
+        ],
+        "reference_answer": "firefox-ios/Client/Frontend/Home/Homepage/TrackerBlockerModule/TrackerBlockerSheetState.swift:114",
+        "wrong_answer": "firefox-ios/Client/Frontend/Home/Homepage/TrackerBlockerModule/TrackerBlockerSheetState.swift:113",
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Client/Frontend/Home/Homepage/TrackerBlockerModule/TrackerBlockerSheetState.swift",
+            "line": 114,
+            "contains": "func fillRatio(for category"
+          }
+        ]
+      }
+    },
+    {
+      "id": "callers-resolve-theme-private-override-settings",
+      "kind": "find callers",
+      "recent_file": "BrowserKit/Sources/Common/Theming/ThemeManager+Resolve.swift",
+      "prompt": "ThemeManager has an extension method resolveTheme(for:privateOverride:), declared in BrowserKit's Common module, and a second overload resolveTheme(for:shouldUsePrivateOverride:shouldBeInPrivateTheme:). Which Swift files under firefox-ios/Client/Frontend/Settings/ call the first overload, that is, a resolveTheme call whose second argument label is privateOverride:? Ignore test files. Give the file names only (for example Foo.swift), comma-separated.",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "AddressBarSettingsView.swift",
+          "AppearanceSettingsView.swift",
+          "PageZoomSettingView.swift",
+          "AppIconView.swift",
+          "AppIconSelectionView.swift",
+          "AIControlsSettingsView.swift"
+        ]
+      }
+    },
+    {
+      "id": "callers-apply-grouped-background",
+      "kind": "find callers",
+      "recent_file": "firefox-ios/Client/Frontend/Library/LibraryPanelHelper.swift",
+      "prompt": "In the Firefox app, which Swift files call the method applyGroupedBackground(theme:in:)? Count only files that contain a call to it, not the file that declares it, and ignore test files. Give the file names only (for example Foo.swift), comma-separated.",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "RecentlyClosedTabsPanel.swift",
+          "ReaderPanel.swift",
+          "BookmarksViewController.swift",
+          "DownloadsPanel.swift",
+          "HistoryPanel.swift"
+        ]
+      }
+    },
+    {
+      "id": "type-theme-conformers",
+      "kind": "understand a type",
+      "recent_file": "BrowserKit/Sources/Common/Theming/NovaPrivateTheme.swift",
+      "prompt": "Which types directly conform to the Theme protocol (declared in BrowserKit's Common module)? Search the Firefox app (firefox-ios/Client) and BrowserKit sources; ignore test targets and focus-ios. Count a type if its declaration lists Theme as a conformance. Give the type names only, comma-separated.",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "LightTheme",
+          "DarkTheme",
+          "NightModeTheme",
+          "PrivateModeTheme",
+          "NovaLightTheme",
+          "NovaDarkTheme",
+          "NovaNightModeTheme",
+          "NovaPrivateTheme",
+          "TabTrayPanelSwipeTheme"
+        ]
+      }
+    },
+    {
+      "id": "type-search-access-point-cases",
+      "kind": "understand a type",
+      "recent_file": "firefox-ios/Client/Frontend/Browser/SearchEngines/SearchAccessPoint.swift",
+      "prompt": "In the Firefox app, the enum SearchAccessPoint lists the places a search can start from. What are all of its cases? Give the case names only, without a leading dot, comma-separated.",
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "default",
+          "context",
+          "widget",
+          "topsite"
+        ]
+      }
+    },
+    {
+      "id": "trace-suggestions-above-announcement",
+      "kind": "trace UI string",
+      "recent_file": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift",
+      "prompt": "With VoiceOver on, typing in the Firefox app's search screen makes VoiceOver announce \"Suggestions above: N\" or the matching \"below\" sentence. Which function decides which of the two sentences is spoken and posts the announcement? Give the repository-relative path of its file and the function name, as path: function.",
+      "check": {
+        "type": "answer_all",
+        "patterns": [
+          "firefox-ios/Client/Frontend/Browser/Search/SearchViewController\\.swift",
+          "\\bannounceResultsCount\\b"
+        ],
+        "reference_answer": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift: announceResultsCount",
+        "wrong_answer": "firefox-ios/Client/Frontend/Browser/Search/SearchViewController.swift: scheduleResultsAnnouncement"
+      }
+    },
+    {
+      "id": "trace-combine-windows-quick-action",
+      "kind": "trace UI string",
+      "recent_file": "firefox-ios/Client/Application/QuickActions.swift",
+      "prompt": "On iPad, the app's home-screen Quick Action (long-press the app icon) is titled \"Combine Windows\". Which function builds that shortcut item and gives it that title? (Ignore the debug feature-flag list and tests, which only mention the words.) Give the repository-relative path of its file and the function name, as path: function.",
+      "check": {
+        "type": "answer_all",
+        "patterns": [
+          "firefox-ios/Client/Application/QuickActions\\.swift",
+          "\\baddDynamicApplicationShortcutItemOfType\\b"
+        ],
+        "reference_answer": "firefox-ios/Client/Application/QuickActions.swift: addDynamicApplicationShortcutItemOfType",
+        "wrong_answer": "firefox-ios/Client/Application/QuickActions.swift: removeDynamicApplicationShortcutItemOfType"
+      }
+    },
+    {
+      "id": "fix-onboarding-card-never-due",
+      "kind": "locate and fix",
+      "recent_file": "firefox-ios/Client/Frontend/Onboarding/OnboardingCardScheduler.swift",
+      "prompt": "In the Firefox app, the scheduled follow-up onboarding cards (the day-2 notifications card and the day-7 sync card) never appear any more, however many separate days the app has been opened. Find the cause and fix it in the source, changing as little as possible.",
+      "inject": {
+        "file": "firefox-ios/Client/Frontend/Onboarding/OnboardingCardScheduler.swift",
+        "find": "lastCardActiveDay != day",
+        "replace": "lastCardActiveDay == day"
+      },
+      "check": {
+        "type": "restored",
+        "alternatives": [
+          "guard\\s+!cards\\.isEmpty,\\s*day\\s*!=\\s*lastCardActiveDay",
+          "lastCardActiveDay\\s*<\\s*day"
+        ]
+      }
+    },
+    {
+      "id": "fix-debouncer-delay-too-short",
+      "kind": "locate and fix",
+      "recent_file": "firefox-ios/Client/Utils/MainActorDebouncer.swift",
+      "prompt": "In the Firefox app, with VoiceOver on, typing in the search screen announces the number of suggestions after every keystroke, and other debounced actions such as the account sync handler fire almost at once, as if the configured delay (given in seconds) were far too small. Find the cause and fix it in the source, changing as little as possible.",
+      "inject": {
+        "file": "firefox-ios/Client/Utils/MainActorDebouncer.swift",
+        "find": "Double(NSEC_PER_SEC)",
+        "replace": "Double(NSEC_PER_MSEC)"
+      },
+      "check": {
+        "type": "restored",
+        "alternatives": [
+          "\\*\\s*Double\\(\\s*(1_000_000_000|1e9)\\s*\\)",
+          "\\*\\s*(1_000_000_000|1e9)\\b"
+        ]
+      }
+    },
+    {
+      "id": "chain-keyboard-request-to-first-responder",
+      "kind": "chained long session",
+      "recent_file": "firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift",
+      "prompt": "Answer three linked questions about the Firefox app's toolbar, in order, each using the previous answer. (1) The enum ToolbarModernAction has exactly one case whose associated value is labelled shouldShow: name that case. (2) The address bar's modernReducer handles that case by copying its payload into a state property: give the repository-relative path and line of that statement, as path:line. (3) A BrowserKit view reads the state property you found in (2), combined with its editing flag, to choose between becoming and resigning first responder: give the repository-relative path of that view's file (non-test) and the name of the function containing that decision, as path: function. Separate the three answers with ' | ' on the ANSWER line.",
+      "check": {
+        "type": "answer_parts",
+        "parts": [
+          [
+            "^didKeyboardRequestChange$"
+          ],
+          [
+            "firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState\\.swift[:]138\\b"
+          ],
+          [
+            "BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView\\.swift",
+            "\\bconfigureURLTextField\\b"
+          ]
+        ],
+        "reference_answer": "didKeyboardRequestChange | firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift:138 | BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView.swift: configureURLTextField",
+        "wrong_answer": "didKeyboardRequestChange | firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift:137 | BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView.swift: configureURLTextField",
+        "pinned_lines": [
+          {
+            "file": "firefox-ios/Client/Frontend/Browser/Toolbars/Redux/AddressBarState.swift",
+            "line": 138,
+            "contains": "shouldShowKeyboard: shouldShow"
+          },
+          {
+            "file": "BrowserKit/Sources/ToolbarKit/AddressToolbar/LocationView/LocationView.swift",
+            "line": 536,
+            "contains": "func configureURLTextField"
+          }
+        ]
+      }
+    }
+  ]
+}
