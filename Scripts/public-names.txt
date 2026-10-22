@@ -1,0 +1,17 @@
+# Neighbour directory names the privacy gate (Scripts/verify-tree.sh) does NOT treat as private.
+#
+# The gate learns what to look for from the directories beside the primary checkout (or beside its
+# product folder): every one of them is taken to be another project, and its name a leak. A name belongs
+# here only if it is public, so that naming it in a commit leaks nothing. Never list a private product
+# here: that would switch its check off.
+#
+# This file is published, so it holds only the public tools this library is part of. A neighbour that is
+# particular to one machine (a generic folder name, a clone of someone else's project) goes in that
+# machine's external list, ~/.config/fieldwork/public-names.txt (or the file FIELDWORK_PUBLIC_NAMES
+# names), in this same format: listed here, the names together would describe the machine.
+#
+# Format: one directory name per line (compared case-insensitively), then `#` and the reason.
+
+SimWalk        # a public tool (github.com/Agulhas-Labs/simwalk), which these corpora benchmark
+Sift           # a public tool (github.com/Agulhas-Labs/sift), which these corpora benchmark
+swift-fieldwork # a public library (github.com/Agulhas-Labs/swift-fieldwork) the tools share
