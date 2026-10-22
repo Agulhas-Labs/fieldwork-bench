@@ -48,12 +48,16 @@ comparable:
 - `corpora/<name>/tasks.json`: the task file, in the format of sift's `Benchmarks/tasks.example.json`,
   pinned to one upstream commit.
 - `.build/corpora/<name>`: the upstream clone (gitignored), fetched at the pinned commit.
+- `Scripts/check-recency.py`: checks that each lookup task's answer rests on lines changed after a date.
 
 ## Choosing a corpus
 
 - **Public, active and large.** Pinned at a commit made after the models being measured were trained,
   with lookup tasks aimed at code changed since then, so an answer cannot come from memory. A task built
-  on an injected bug can't be answered from memory either, because the bug is new.
+  on an injected bug can't be answered from memory either, because the bug is new. A recently changed
+  file isn't enough on its own: each lookup task lists every line its answer rests on as `pinned_lines`,
+  and `python3 Scripts/check-recency.py corpora/<name>/tasks.json .build/corpora/<name>` blames each one
+  at the pinned commit. Every pinned line must have changed after 2026-07-01 (`--since`).
 - **Buildable for its index** where it can be, with a generic simulator destination, so no simulator is
   created or booted.
 - **Not vendored.** The upstream code stays upstream. A task file names its symbols and lines, and
