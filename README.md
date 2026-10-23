@@ -59,7 +59,8 @@ comparable:
   and `python3 Scripts/check-recency.py corpora/<name>/tasks.json .build/corpora/<name>` blames each one
   at the pinned commit. Every pinned line must have changed after 2026-07-01 (`--since`).
 - **Buildable for its index** where it can be, with a generic simulator destination, so no simulator is
-  created or booted.
+  created or booted, and with `COMPILER_INDEX_STORE_ENABLE=YES`: a scheme's Test configuration can build
+  its local packages optimised, and Xcode indexes an optimised build only when asked.
 - **Not vendored.** The upstream code stays upstream. A task file names its symbols and lines, and
   nothing else of it is copied here.
 

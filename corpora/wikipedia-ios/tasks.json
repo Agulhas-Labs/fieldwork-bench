@@ -7,7 +7,7 @@
     "index_build": [
       "/bin/sh",
       "-c",
-      "xcodebuild -project Wikipedia.xcodeproj -scheme Wikipedia -destination 'generic/platform=iOS Simulator' ARCHS=arm64 -derivedDataPath \"$BENCH_DERIVED_DATA\" CODE_SIGNING_ALLOWED=NO build-for-testing"
+      "xcodebuild -project Wikipedia.xcodeproj -scheme Wikipedia -destination 'generic/platform=iOS Simulator' ARCHS=arm64 -derivedDataPath \"$BENCH_DERIVED_DATA\" CODE_SIGNING_ALLOWED=NO COMPILER_INDEX_STORE_ENABLE=YES build-for-testing"
     ],
     "note": "Pass the clone with --corpus <clone>@<commit>; `repository` is left out because a public file cannot name a local path. warm null: not built, so every check is answer-based or restored. index_build is for arm B's index store only; it needs no setup step."
   },
