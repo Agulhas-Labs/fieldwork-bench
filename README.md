@@ -13,11 +13,20 @@ and anyone can rerun it.
 | --- | --- | --- | --- | --- |
 | wikipedia-ios | [wikimedia/wikipedia-ios](https://github.com/wikimedia/wikipedia-ios) | MIT | `27a82770` | 229,615, plus 28,215 lines of Objective-C |
 | firefox-ios | [mozilla-mobile/firefox-ios](https://github.com/mozilla-mobile/firefox-ios) | MPL-2.0 | `d284ab8e` | 524,909 |
+| swift-format | [swiftlang/swift-format](https://github.com/swiftlang/swift-format) | Apache-2.0 | `b15dd59f` | 57,700 |
 
 Rows are added as each corpus's task file passes the harness's `validate`, which makes no model calls.
 Each file has ten tasks: a definition, two caller sets, two type questions, two UI strings traced to the
 code that shows them, two injected one-line bugs, and one chained question. One of wikipedia-ios's
 caller sets includes an Objective-C file, to show where a Swift-only index stops.
+
+swift-format is the exception, and the one corpus with build and test tasks: a SwiftPM package that
+builds in about 25 seconds warm, where the two apps can't be built or tested by the harness. It has four
+tasks and no lookups: two locate-and-fix (a one-line bug injected, success is the named XCTest suite
+passing with `Tests/` unchanged), one build fix (an injected compile error, same check), and one run-tests-and-report
+(five failing test functions named exactly, no file changed). Every task injects a bug, so
+`check-recency.py` has nothing to check. The file records each task's clean and injected controls as
+`verified_at` the pinned commit, since `validate` does not run a `tests` check.
 
 ## Running a corpus
 
@@ -27,6 +36,9 @@ recently), then run the harness from a sift checkout, passing the clone with `--
 ```sh
 git clone --shallow-since=2026-06-01 https://github.com/wikimedia/wikipedia-ios .build/corpora/wikipedia-ios
 git -C .build/corpora/wikipedia-ios checkout 27a82770e40cbe3007dc287e059cc3a6d11b6f77
+
+git clone --shallow-since=2026-06-01 https://github.com/swiftlang/swift-format .build/corpora/swift-format
+git -C .build/corpora/swift-format checkout b15dd59fad21f1770cdc888b1ca6e2937490001a
 
 # from a sift checkout
 python3 Benchmarks/bench.py validate --tasks <this repo>/corpora/wikipedia-ios/tasks.json \
