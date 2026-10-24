@@ -46,14 +46,13 @@ python3 Benchmarks/bench.py validate --tasks <this repo>/corpora/wikipedia-ios/t
 sh Benchmarks/run.sh --tasks <same> --corpus <same> --repeats 3
 ```
 
-Two harness changes are still pending in sift, and until they land, numbers from these corpora are not
-comparable:
+All three corpora run under the harness of SwiftSure 0.3.0, which recognises a restored file whose path
+holds a space (wikipedia-ios's two fix tasks) and answers firefox-ios's 608 KB `Strings.swift` in place in
+both the benchmark and a direct replay. The 0.3.0 results are in SwiftSure's
+`Benchmarks/RESULTS-public-corpora.md`.
 
-- **wikipedia-ios:** its two fix tasks edit files whose paths hold a space. The current harness doesn't
-  recognise such a file as restored, so a correct fix scores as a failure. `validate` passes regardless.
-- **firefox-ios:** `validate` stops at its hook check, because the corpus's largest file (the 608 KB
-  `Strings.swift`) is withheld for its size. The benchmark and a direct replay also judge that file
-  differently, so firefox-ios numbers wait until that is understood.
+`validate` does not run a `tests` check's controls (swift-format's four tasks): run each task's filter by
+hand on the clean clone (exit 0, more than zero tests) and with its injection applied (non-zero exit).
 
 ## Layout
 
