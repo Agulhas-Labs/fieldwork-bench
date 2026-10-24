@@ -1,0 +1,113 @@
+{
+  "corpus": {
+    "label": "swift-format",
+    "upstream": "https://github.com/swiftlang/swift-format",
+    "commit": "b15dd59fad21f1770cdc888b1ca6e2937490001a",
+    "warm": [
+      "swift",
+      "build",
+      "--build-tests"
+    ],
+    "note": "Pass the clone with --corpus <clone>@<commit>; `repository` is left out because a public file cannot name a local path. warm is the harness default, written out so the file reads on its own: the package is built once, so each task's tests run incrementally. No index_build: this is a SwiftPM package, and arm B's `where` falls back to written names. Every task injects a one-line bug, so none needs check-recency.py. Filters are suite names that match more than zero tests: `swift test --filter` exits 0 when nothing matches."
+  },
+  "preamble": "This is a Swift package. Build it with `swift build --build-tests` and run a suite with `swift test --filter <SuiteName>`. Paths are repository-relative.",
+  "answer_rule": "End your reply with exactly one line that starts with ANSWER: and holds only the answer in the form the task asks for.",
+  "tasks": [
+    {
+      "id": "fix-raw-identifier-import-sort",
+      "kind": "locate and fix",
+      "prompt": "Sorting imports goes wrong when a module name is written in backticks: `import `Beta`` is ordered by its backticked spelling, so it lands in the wrong place among plain names. Find the cause in Sources/ and fix it with a minimal change. Do not change any test. When you are done, say what you changed.",
+      "inject": {
+        "file": "Sources/SwiftFormat/Rules/OrderedImports.swift",
+        "find": "text.hasSuffix(\"`\") && text.count > 2",
+        "replace": "text.hasSuffix(\"`\") && text.count > 20"
+      },
+      "check": {
+        "type": "tests",
+        "filter": "OrderedImportsTests",
+        "unchanged": [
+          "Tests"
+        ],
+        "controls": {
+          "clean": "pass",
+          "injected": "fail",
+          "verified_at": "b15dd59f"
+        }
+      }
+    },
+    {
+      "id": "fix-import-order-reversed",
+      "kind": "locate and fix",
+      "prompt": "The import-ordering rule now sorts imports backwards: a file with `import Alpha` above `import Zebra` is reported as unsorted and rewritten with Zebra first. Find the cause in Sources/ and fix it with a minimal change. Do not change any test. When you are done, say what you changed.",
+      "inject": {
+        "file": "Sources/SwiftFormat/Rules/OrderedImports.swift",
+        "find": "return lhs.components.lexicographicallyPrecedes(rhs.components)",
+        "replace": "return rhs.components.lexicographicallyPrecedes(lhs.components)"
+      },
+      "check": {
+        "type": "tests",
+        "filter": "OrderedImportsTests",
+        "unchanged": [
+          "Tests"
+        ],
+        "controls": {
+          "clean": "pass",
+          "injected": "fail",
+          "verified_at": "b15dd59f"
+        }
+      }
+    },
+    {
+      "id": "build-fix-duplicate-import-message",
+      "kind": "build fix",
+      "prompt": "The package no longer builds. Make it build again without changing any test, then run the tests for the import-ordering rule to confirm they pass. When you are done, say what you changed.",
+      "inject": {
+        "file": "Sources/SwiftFormat/Rules/OrderedImports.swift",
+        "find": "removeDuplicateImport: Finding.Message = \"remove this duplicate import\"",
+        "replace": "removeDuplicateImport: Finding.Message = 42"
+      },
+      "check": {
+        "type": "tests",
+        "filter": "OrderedImportsTests",
+        "unchanged": [
+          "Tests"
+        ],
+        "controls": {
+          "clean": "pass",
+          "injected": "fail",
+          "verified_at": "b15dd59f"
+        }
+      }
+    },
+    {
+      "id": "report-spi-extension-failures",
+      "kind": "run tests and report",
+      "prompt": "Someone changed how the rule that removes access levels from extensions treats attributes. Run the tests for that rule and report every failing test function by name. Do not change any file.",
+      "inject": {
+        "file": "Sources/SwiftFormat/Rules/NoAccessLevelOnExtensionDeclaration.swift",
+        "find": "keywordToAdd != nil ? node.attributes.filter { $0.isSPIAttribute } : []",
+        "replace": "keywordToAdd != nil ? node.attributes.filter { !$0.isSPIAttribute } : []"
+      },
+      "check": {
+        "type": "answer_set",
+        "expected": [
+          "testMultipleSPIAttributesAreMovedToMembers",
+          "testSPIAttributeIsMovedToMembers",
+          "testSPIAttributeIsMovedToNestedProtocol",
+          "testSPIAttributeIsPlacedBeforeExistingMemberAttributes",
+          "testSPIAttributeMovesButOtherAttributesStayOnExtension"
+        ],
+        "filter": "NoAccessLevelOnExtensionDeclarationTests",
+        "unchanged": [
+          "Sources",
+          "Tests"
+        ],
+        "controls": {
+          "clean": "pass",
+          "injected": "fail",
+          "verified_at": "b15dd59f"
+        }
+      }
+    }
+  ]
+}
